@@ -108,6 +108,9 @@
   <div class="legend-item"><div class="dot" style="background:#3b82f6"></div>Admin (CallerDesk)</div>
   <div class="legend-item"><div class="dot" style="background:#8b5cf6"></div>Reseller / Admin Account</div>
   <div class="legend-item"><div class="dot" style="background:#10b981"></div>Members (inside any account)</div>
+  <div class="legend-item" style="border-color:rgba(59,130,246,0.35);color:#60a5fa">ct = 1 → CallerDesk</div>
+  <div class="legend-item" style="border-color:rgba(59,130,246,0.35);color:#60a5fa">ct = 0- → DIRECT</div>
+  <div class="legend-item" style="border-color:rgba(139,92,246,0.35);color:#a78bfa">ct = 2 → RESELLER</div>
 </div>
 
 <div class="flow">
@@ -126,6 +129,7 @@
       <div class="mp">Creates → <span>Admin accounts</span></div>
       <div class="mp">parent_id → <span>created_by_id</span></div>
       <div class="mp">Scope → <span>Global</span></div>
+      <div class="mp">client_type → <span>— (root)</span></div>
     </div>
   </div>
 
@@ -146,33 +150,35 @@
           <div class="badges">
             <span class="badge bb">role = 2</span>
             <span class="badge bb">ur = 1</span>
+            <span class="badge bb">ct = 1</span>
           </div>
         </div>
-        <div class="desc">Account Type = <strong style="color:#60a5fa">admin</strong> · Client Type = <strong style="color:#60a5fa">CallerDesk</strong>. Manages its own workspace and creates only user-type sub-accounts.</div>
+        <div class="desc">Account Type = <strong style="color:#60a5fa">admin</strong> · Client Type = <strong style="color:#60a5fa">CallerDesk (0)</strong>. Manages its own workspace and creates only user-type sub-accounts.</div>
         <div class="meta">
           <div class="mp">parent_id → <span>super_admin</span></div>
           <div class="mp">Level → <span>1</span></div>
+          <div class="mp">client_type → <span>0</span></div>
         </div>
         <div class="mb">
           <div class="mb-title">🏗️ Sub-Account Created</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#60a5fa;font-size:.73rem">👤 USER Account</div>
-            <div class="mv">role=<span>2</span></div><div class="mv">ur=<span>2</span></div>
+            <div class="mv">role=<span>2</span></div><div class="mv">ur=<span>2</span></div><div class="mv">ct=<span>1</span></div>
           </div>
         </div>
         <div class="mb">
           <div class="mb-title">👥 Members Inside USER Account</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#6ee7b7;font-size:.73rem">🟢 Regular</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div><div class="mv">ct=<span>1</span></div>
           </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#a78bfa;font-size:.73rem">🟣 Group Owner</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div><div class="mv">ct=<span>0</span></div>
           </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#f472b6;font-size:.73rem">🔴 Admin</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div><div class="mv">ct=<span>0</span></div>
           </div>
         </div>
       </div>
@@ -190,33 +196,35 @@
           <div class="badges">
             <span class="badge bp">role = 2</span>
             <span class="badge bp">ur = 1</span>
+            <span class="badge bp">ct = 2</span>
           </div>
         </div>
-        <div class="desc">Account Type = <strong style="color:#a78bfa">user</strong> · Client Type = <strong style="color:#a78bfa">Reseller</strong>. Although account_type is "user", <strong style="color:#a78bfa">user_role = 1</strong> grants full admin-level access.</div>
+        <div class="desc">Account Type = <strong style="color:#a78bfa">user</strong> · Client Type = <strong style="color:#a78bfa">Reseller (2)</strong>. Although account_type is "user", <strong style="color:#a78bfa">user_role = 1</strong> grants full admin-level access.</div>
         <div class="meta">
           <div class="mp">parent_id → <span>super_admin</span></div>
           <div class="mp">Level → <span>1</span></div>
+          <div class="mp">client_type → <span>2</span></div>
         </div>
         <div class="mb">
           <div class="mb-title">🏗️ Sub-Account Created</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#60a5fa;font-size:.73rem">🛡️ Admin (direct)</div>
-            <div class="mv">role=<span>2</span></div><div class="mv">ur=<span>0</span></div>
+            <div class="mv">role=<span>2</span></div><div class="mv">ur=<span>0</span></div><div class="mv">ct=<span>2</span></div>
           </div>
         </div>
         <div class="mb">
           <div class="mb-title">👥 Members Inside</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#6ee7b7;font-size:.73rem">🟢 Regular</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div><div class="mv">ct=<span>2</span></div>
           </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#a78bfa;font-size:.73rem">🟣 Group Owner</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div><div class="mv">ct=<span>2</span></div>
           </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#f472b6;font-size:.73rem">🔴 Admin Member</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div><div class="mv">ct=<span>2</span></div>
           </div>
         </div>
       </div>
@@ -241,20 +249,21 @@
         <div class="meta">
           <div class="mp">parent_id → <span>super_admin</span></div>
           <div class="mp">Level → <span>1</span></div>
+          <div class="mp">client_type → <span>1</span></div>
         </div>
         <div class="mb">
           <div class="mb-title">👥 Members Inside</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#6ee7b7;font-size:.73rem">🟢 Regular</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div><div class="mv">ct=<span>1</span></div>
           </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#a78bfa;font-size:.73rem">🟣 Group Owner</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div><div class="mv">ct=<span>1</span></div>
           </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
+          <div class="mr" style="grid-template-columns:1fr 55px 55px 55px;">
             <div class="mt" style="color:#f472b6;font-size:.73rem">🔴 Admin Member</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div>
+            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div><div class="mv">ct=<span>1</span></div>
           </div>
         </div>
       </div>
@@ -265,44 +274,7 @@
   <!-- SPACER -->
   <div style="height:32px"></div>
 
-  <!-- REFERENCE CARD -->
-  <div class="ref">
-    <h3>📌 Complete Role Reference Table</h3>
-    <div class="rg">
-      <div class="ri">
-        <div class="ri-n" style="color:#f59e0b">👑 Super Admin</div>
-        <div class="ri-v">role = <span>1</span><br>user_role = <span>—</span><br>Level = <span>0 (root)</span></div>
-      </div>
-      <div class="ri">
-        <div class="ri-n" style="color:#60a5fa">🛡️ Admin (CallerDesk)</div>
-        <div class="ri-v">role = <span>2</span><br>user_role = <span>1</span><br>Level = <span>1</span></div>
-      </div>
-      <div class="ri">
-        <div class="ri-n" style="color:#60a5fa">👤 User Account</div>
-        <div class="ri-v">role = <span>2</span><br>user_role = <span>2</span><br>Type = <span>CallerDesk user</span></div>
-      </div>
-      <div class="ri">
-        <div class="ri-n" style="color:#a78bfa">🏢 Admin/Reseller</div>
-        <div class="ri-v">role = <span>2</span><br>user_role = <span>1</span><br>Type = <span>Reseller admin</span></div>
-      </div>
-      <div class="ri">
-        <div class="ri-n" style="color:#60a5fa">🛡️ Admin (Direct)</div>
-        <div class="ri-v">role = <span>2</span><br>user_role = <span>0</span><br>client_type = <span>1 (DIRECT)</span></div>
-      </div>
-      <div class="ri">
-        <div class="ri-n" style="color:#6ee7b7">🟢 Member: Regular</div>
-        <div class="ri-v">role = <span>3</span><br>user_role = <span>2</span></div>
-      </div>
-      <div class="ri">
-        <div class="ri-n" style="color:#a78bfa">🟣 Member: Group Owner</div>
-        <div class="ri-v">role = <span>3</span><br>user_role = <span>3</span></div>
-      </div>
-      <div class="ri">
-        <div class="ri-n" style="color:#f472b6">🔴 Member: Admin</div>
-        <div class="ri-v">role = <span>3</span><br>user_role = <span>1</span></div>
-      </div>
-    </div>
-  </div>
+
 
 </div>
 </body>
