@@ -34,11 +34,14 @@
   }
 
   /* INNER MINI-TREE (sub-account → members) */
-  .sub-node { margin-top: 13px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
-  .sub-node-title { font-family: 'JetBrains Mono',monospace; font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .sub-tree-wrap { position: relative; margin-top: 28px; }
+  .sub-tree-wrap::before { content: ''; position: absolute; top: -14px; left: 50%; width: 2px; height: 14px; background: var(--dim); transform: translateX(-1px); }
+  .sub-tree-label { text-align: center; font-family: 'JetBrains Mono',monospace; font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .sub-node { background: rgba(255,255,255,0.045); border: 1.5px solid var(--border); border-radius: 9px; padding: 10px 12px; box-shadow: 0 0 0 1px rgba(255,255,255,0.02) inset; }
   .sub-node-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-  .sub-node-row .mt { font-size: 0.78rem; }
+  .sub-node-row .mt { font-size: 0.8rem; }
   .sub-node-row .mv { font-size: 0.66rem; }
+  .sub-node-tag { font-family: 'JetBrains Mono',monospace; font-size: 0.56rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; display: block; }
   .members-branch { position: relative; margin-top: 24px; }
   .members-branch::before { content: ''; position: absolute; top: -14px; left: 50%; width: 2px; height: 14px; background: var(--dim); transform: translateX(-1px); }
   .members-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; position: relative; padding-top: 14px; }
@@ -48,7 +51,7 @@
   .member-mini .mm-name { font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; line-height: 1.2; }
   .member-mini .mm-v { font-family: 'JetBrains Mono',monospace; font-size: 0.58rem; color: var(--muted); line-height: 1.5; }
   .member-mini .mm-v span { color: var(--text); font-weight: 700; }
-  .members-branch-label { text-align: center; font-family: 'JetBrains Mono',monospace; font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; margin-bottom: -8px; }
+  .members-branch-label { text-align: center; font-family: 'JetBrains Mono',monospace; font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
   .node { width: 100%; border-radius: 14px; padding: 20px 24px; border: 1.5px solid; margin: 0; transition: transform .2s; }
   .node:hover { transform: translateY(-2px); }
   .node-super  { border-color: var(--super);    background: var(--super-glow);    box-shadow: 0 0 40px rgba(245,158,11,0.08); }
@@ -153,26 +156,34 @@
           <div class="mp">parent_id → <span>super_admin</span></div>
           <div class="mp">Level → <span>1</span></div>
         </div>
-        <div class="mb">
-          <div class="mb-title">🏗️ Sub-Account Created</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#60a5fa;font-size:.73rem">👤 USER Account</div>
-            <div class="mv">role=<span>2</span></div><div class="mv">ur=<span>2</span></div>
+        <div class="sub-tree-wrap">
+          <div class="sub-tree-label">↓ creates sub-account</div>
+          <div class="sub-node">
+            <span class="sub-node-tag">🏗️ Sub-Account</span>
+            <div class="sub-node-row">
+              <div class="mt" style="color:#60a5fa">👤 USER Account</div>
+              <div style="display:flex;gap:6px;">
+                <div class="mv">role=<span>2</span></div>
+                <div class="mv">ur=<span>2</span></div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="mb">
-          <div class="mb-title">👥 Members Inside USER Account</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#6ee7b7;font-size:.73rem">🟢 Regular</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div>
-          </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#a78bfa;font-size:.73rem">🟣 Group Owner</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div>
-          </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#f472b6;font-size:.73rem">🔴 Admin</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div>
+          <div class="members-branch">
+            <div class="members-row">
+              <div class="member-mini">
+                <div class="mm-name" style="color:#6ee7b7">🟢 Regular</div>
+                <div class="mm-v">role=<span>3</span><br>ur=<span>2</span></div>
+              </div>
+              <div class="member-mini">
+                <div class="mm-name" style="color:#a78bfa">🟣 Group Owner</div>
+                <div class="mm-v">role=<span>3</span><br>ur=<span>3</span></div>
+              </div>
+              <div class="member-mini">
+                <div class="mm-name" style="color:#f472b6">🔴 Admin</div>
+                <div class="mm-v">role=<span>3</span><br>ur=<span>1</span></div>
+              </div>
+            </div>
+            <div class="members-branch-label">members inside USER account</div>
           </div>
         </div>
       </div>
@@ -197,26 +208,34 @@
           <div class="mp">parent_id → <span>super_admin</span></div>
           <div class="mp">Level → <span>1</span></div>
         </div>
-        <div class="mb">
-          <div class="mb-title">🏗️ Sub-Account Created</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#60a5fa;font-size:.73rem">🛡️ Admin (direct)</div>
-            <div class="mv">role=<span>2</span></div><div class="mv">ur=<span>0</span></div>
+        <div class="sub-tree-wrap">
+          <div class="sub-tree-label">↓ creates sub-account</div>
+          <div class="sub-node">
+            <span class="sub-node-tag">🏗️ Sub-Account</span>
+            <div class="sub-node-row">
+              <div class="mt" style="color:#60a5fa">🛡️ Admin (direct)</div>
+              <div style="display:flex;gap:6px;">
+                <div class="mv">role=<span>2</span></div>
+                <div class="mv">ur=<span>0</span></div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="mb">
-          <div class="mb-title">👥 Members Inside</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#6ee7b7;font-size:.73rem">🟢 Regular</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div>
-          </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#a78bfa;font-size:.73rem">🟣 Group Owner</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div>
-          </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#f472b6;font-size:.73rem">🔴 Admin Member</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div>
+          <div class="members-branch">
+            <div class="members-row">
+              <div class="member-mini">
+                <div class="mm-name" style="color:#6ee7b7">🟢 Regular</div>
+                <div class="mm-v">role=<span>3</span><br>ur=<span>2</span></div>
+              </div>
+              <div class="member-mini">
+                <div class="mm-name" style="color:#a78bfa">🟣 Group Owner</div>
+                <div class="mm-v">role=<span>3</span><br>ur=<span>3</span></div>
+              </div>
+              <div class="member-mini">
+                <div class="mm-name" style="color:#f472b6">🔴 Admin Member</div>
+                <div class="mm-v">role=<span>3</span><br>ur=<span>1</span></div>
+              </div>
+            </div>
+            <div class="members-branch-label">members inside Admin (direct)</div>
           </div>
         </div>
       </div>
@@ -242,20 +261,22 @@
           <div class="mp">parent_id → <span>super_admin</span></div>
           <div class="mp">Level → <span>1</span></div>
         </div>
-        <div class="mb">
-          <div class="mb-title">👥 Members Inside</div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#6ee7b7;font-size:.73rem">🟢 Regular</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>2</span></div>
+        <div class="members-branch" style="margin-top: 30px;">
+          <div class="members-row">
+            <div class="member-mini">
+              <div class="mm-name" style="color:#6ee7b7">🟢 Regular</div>
+              <div class="mm-v">role=<span>3</span><br>ur=<span>2</span></div>
+            </div>
+            <div class="member-mini">
+              <div class="mm-name" style="color:#a78bfa">🟣 Group Owner</div>
+              <div class="mm-v">role=<span>3</span><br>ur=<span>3</span></div>
+            </div>
+            <div class="member-mini">
+              <div class="mm-name" style="color:#f472b6">🔴 Admin Member</div>
+              <div class="mm-v">role=<span>3</span><br>ur=<span>1</span></div>
+            </div>
           </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#a78bfa;font-size:.73rem">🟣 Group Owner</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>3</span></div>
-          </div>
-          <div class="mr" style="grid-template-columns:1fr 70px 70px;">
-            <div class="mt" style="color:#f472b6;font-size:.73rem">🔴 Admin Member</div>
-            <div class="mv">role=<span>3</span></div><div class="mv">ur=<span>1</span></div>
-          </div>
+          <div class="members-branch-label">members inside</div>
         </div>
       </div>
     </div>
